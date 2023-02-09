@@ -11,70 +11,8 @@
   </head>
 
 <body>
-<header>
-   <header class="navbar-dark bg-dark">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a class="navbar-brand p-2" href="/">LOGO</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-  　　　　　　<span class="navbar-toggler-icon"></span>
-　　　　　</button>
-　　　　　<div class="navbar-collapse" id="navbarNavDropdown">
- 　　　　　　　 <ul class="navbar-nav md-auto">
-  <% if admin_signed_in? %>
-      <li class="nav-link -light">
-        <%= link_to "商品一覧", admins_items_path %>
-      </li>
-      <li class="nav-link text-light">
-        <%= link_to "会員一覧", admins_users_path %>
-      </li>
-      <li class="nav-link text-light">
-        <%= link_to "注文一覧", admins_orders_path %>
-      </li>
-      <li class="nav-link text-light">
-        <%= link_to "ジャンル一覧", about_path %>
-      <li class="nav-link text-light">
-        <%= link_to "管理者ログアウト",  destroy_admin_session_path, method: :delete %>
-      </li>
-  <% elsif customer_signed_in? %>
-      <li class="nav-link text-light">
-        <%= link_to "マイページ",  my_page_publics_users_path %>
-      </li>
-      <li class="nav-link text-light">
-        <%= link_to "商品一覧", publics_items_path %>
-      </li>
-      <li class="nav-link text-light">
-        <%= link_to "カート", publics_cart_items_path %>
-      </li>
-      <li class="nav-link text-light">
-        <i></i>
-        <%= link_to "ユーザーログアウト",  destroy_user_session_path, method: :delete %>
-      </li>
-  <% else %>
-      <li class="nav-link link-light">
-       <i></i>
-        <%= link_to "About", root_path %>
-      </li>
-      <li class="nav-link text-light">
-        <i></i>
-        <%= link_to "商品一覧",  root_path %>
-      </li>
-      <li class="nav-link text-light">
-        <i></i>
-        <%= link_to "新規登録",  root_path %>
-      </li>
-      <li class="nav-link text-light">
-        <i></i>
-        <%= link_to "ログイン", root_path %>
-      </li>
-  <% end %>
-      </ul>
-      </div>
-      </div>
-      </nav>
-    </header>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<header class="navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">LOOK－HOR</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,43 +20,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">作品一覧</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            ジャンル一覧
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/">Action</a></li>
-            <li><a class="dropdown-item" href="/">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/">Something else here</a></li>
-          </ul>
-        </li>
+      <li class="nav-link -light">
+        <%= link_to "作品一覧", public_movies_path %>
+      </li>
         <% if customer_signed_in? %>
-        <li class="nav-item">
-          <a class="nav-link" href="/">マイページ</a>
+        <li class="nav-link">
+          <%= link_to "マイページ", public_customer_path(current_customer_id) %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">ログアウト</a>
+        <li class="nav-link" href="/">
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
         </li>
         <% elsif admin_signed_in? %>
-        <li class="nav-item">
-          <a class="nav-link" href="/">会員一覧</a>
+        <li class="nav-link">
+          <%= link_to "会員一覧", admin_customers_path %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">通報一覧</a>
+        <li class="nav-link">
+          <%= link_to "通報レビュー一覧", report_admin_reviews_path %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">ログアウト</a>
+        <li>
+          <%= link_to "通報コメント一覧", report_admin_review_comments_path %>
+        </li>
+        <li class="nav-link">
+          <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
         </li>
         <% else %>
-        <li class="nav-item">
-          <a class="nav-link" href="/">新規会員登録</a>
+        <li class="nav-link">
+          <%= link_to "新規会員登録", new_admin_registration_path %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">ログイン</a>
+        <li class="nav-link">
+          <%= link_to "ログイン", new_admin_session_path %>
         </li>
         <% end %>
       </ul>

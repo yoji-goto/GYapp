@@ -50,7 +50,7 @@ Rails.application.routes.draw do
         get 'genre'
       end
     end
-    resources :customers, :only => [:show, :edit, :update] do
+    resources :customers, :only => [:show, :edit, :update, :index] do
       collection do
         patch 'withdrawal'
       end
