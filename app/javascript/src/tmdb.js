@@ -9,6 +9,7 @@ const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c
 
 // 要素を取得
 const main = document.getElementById('main')
+const show = document.getElementById('show')
 const form = document.getElementById('form')
 const search = document.getElementById('search')
 
@@ -34,6 +35,7 @@ function showMovies(movies) {
   movies.forEach((movie) => {
     // オブジェクトから各変数に格納
     const {
+      id,
       title,
       poster_path,
       vote_average,
@@ -41,17 +43,38 @@ function showMovies(movies) {
     } = movie
 
     // topページ用
-    const movieEl = document.createElement('div')
-    movieEl.classList.add('movie')
+    const movieEl1 = document.createElement('div')
+    movieEl1.classList.add('movie')
     // MoveパネルをHTMLに埋め込む
-    movieEl.innerHTML =
+    movieEl1.innerHTML =
     `
      <div class="col-md-3 offset-md-1 d-inline-block text-truncate" style="max-width: 230px;">
       <img src="${IMG_PATH + poster_path}" alt="${title}" width="${200}" margin="${10}">
-      <a href="/public/movies/:id">${title}</a>
+      <h5><a href="/public/movies/${id}">${title}</a></h5>
      </div>
     `
-    main.appendChild(movieEl)
+    main.appendChild(movieEl1)
+
+    //作品詳細用
+    const movieEl2 = document.createElement('div')
+    movieEl2.classList.add('movie')
+    movieEl2.innerHTML =
+    `
+    <div class="col-md-4">
+    <img src="${IMG_PATH + poster_path}" alt="${title}" width="${200}" margin="${10}">
+    <div>みんなの評価</div>
+    </div>
+
+    <div class="col-md-4">
+    <h3>${title}</h3>
+    <table>
+    <tr><th>公開日時</th><td>${title}</td></tr>
+    <tr><th>作品紹介</th></tr>
+    <tr><td>${overview}</td></tr>
+    </table>
+    </div>
+    `
+    show.appendChild(movieEl2)
   })
 }
 

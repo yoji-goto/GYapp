@@ -1,2 +1,23 @@
-<h1>Public::Movies#show</h1>
-<p>Find me in app/views/public/movies/show.html.erb</p>
+<h1>作品詳細</h1>
+<div class="container">
+  <div class="row">
+    <div id="show">
+      <div class="col-md-4">
+        <div>
+          <%= @movie. %>
+          <%= link_to "レビューを投稿する", new_public_review_path %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+    <% @reviews.each do |review| %>
+    <div class="border"><%= review.title %></div>
+    <div class="border"><%= review.review %></div>
+    <% end %>
+    </div>
+  </div>
+</div>

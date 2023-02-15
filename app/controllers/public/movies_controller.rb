@@ -7,5 +7,7 @@ class Public::MoviesController < ApplicationController
   end
 
   def show
+    @movie =
+    @reviews =
   end
 end
