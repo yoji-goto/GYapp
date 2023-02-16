@@ -18,3 +18,5 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import '../src/tmdb.js'
+
+import '../src/show.js'
