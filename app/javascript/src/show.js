@@ -9,8 +9,6 @@ const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c
 
 // 要素を取得
 const show = document.getElementById('show')
-const form = document.getElementById('form')
-const search = document.getElementById('search')
 
 // 要素を取得
 // 映画情報を取得
@@ -30,72 +28,31 @@ function showMovies(movies) {
   // 画面初期化
   show.innerHTML = ''
 
-  movies.forEach((movie) => {
-    // オブジェクトから各変数に格納
-    const {
-      id,
-      title,
-      poster_path,
-      vote_average,
-      overview
-    } = movie
+ //urlのidから作品を取得
+   const params = new URLSearchParams(window.location.search)
+   const id = params.get('id')
+   console.log(id)//null
+   const showMovie = movies.find(id)
+   console.log(showMovie)
 
     //作品詳細用
-    const movieEl = document.createElement('div')
-    movieEl.classList.add('movie')
-
-    movieEl.innerHTML =
+    const showEL = document.createElement('div')
+    showEL.innerHTML =
     `
     <div class="col-md-4">
-    <img src="${IMG_PATH + poster_path}" alt="${title}" width="${200}" margin="${10}">
+    <img src="${IMG_PATH + showMovie.poster_path}" alt="${showMovie.title}" width="${200}" margin="${10}">
     <div>みんなの評価</div>
     </div>
 
     <div class="col-md-4">
-    <h3>${title}</h3>
+    <h3>${showMovie.title}</h3>
     <table>
-    <tr><th>公開日時</th><td>${title}</td></tr>
+    <tr><th>公開日時</th><td>${showMovie.title}</td></tr>
     <tr><th>作品紹介</th></tr>
-    <tr><td>${overview}</td></tr>
+    <tr><td>${showMovie.overview}</td></tr>
     </table>
     </div>
     `
-    show.appendChild(movieEl)
-  })
+    show.appendChild(showEL)
 }
-
-
-
-  // 人気順にクラス分けをする
-function getClassByRate(vote) {
-  if(vote >= 8) {
-    return 'green'
-  } else if(vote >= 5) {
-    return 'orangge'
-  } else {
-    return 'red'
-  }
-}
-
-// formから検索できるようにする
-form.addEventListener('submit', (e) => {
-  // フォームのデフォルトの動きを禁止
-  // ここではページのリダイレクトをキャンセルしている
-  e.preventDefault()
-
-  // 検索文字列取得
-  const searchTerm = search.value
-
-  if(search && searchTerm !== '') {
-    // 検索文字列を元に検索をする
-    getMovies(SEARCH_API + searchTerm)
-    // 検索文字列を削除
-    search.value = ''
-  }else {
-    // ページを再読み込み
-    // 検索キーワードない状態で検索すると初期状態のデータを表示できる
-    // Searchで検索した結果をクリアしたい時などに使える
-    window.location.reload()
-  }
-})
 })

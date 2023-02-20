@@ -26,6 +26,7 @@ async function getMovies(url) {
   /*global data*/
   showMovies(data.results)
 }
+
 function showMovies(movies) {
   // 画面初期化
   main.innerHTML = ''

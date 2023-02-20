@@ -1,7 +1,7 @@
 <h1>作品詳細</h1>
 <div class="container">
   <div class="row">
-    <div id="show">
+    <div id="show"></div>
       <div class="col-md-4">
         <div>
           <%= link_to "レビューを投稿する", new_public_review_path %>
@@ -10,7 +10,6 @@
       <div class="col-md-4">
         <div>公開タグ</div>
       </div>
-    </div>
     <div class="col-md-4">
     <% @reviews.each do |review| %>
     <div class="border"><%= review.title %>|<%= link_to review.user.name, public_customer_path(review.user.id) %></div>
@@ -19,3 +18,4 @@
     </div>
   </div>
 </div>
+<script src="../src/show.js" type="module"></script>
