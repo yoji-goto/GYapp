@@ -49,11 +49,14 @@ function showMovies(movies) {
     `
      <div class="col-md-3 offset-md-1 d-inline-block text-truncate" style="max-width: 230px;">
       <img src="${IMG_PATH + poster_path}" alt="${title}" width="${200}" margin="${10}">
-      <h5><a href="/public/movies/${id}">${title}</a></h5>
+      <h5><a id="url"  href="/public/movies/${id}">${title}</a></h5>
      </div>
     `
     main.appendChild(movieEl)
   })
+
+    const movieEl = document.createElement('div')
+    movieEl.classList.add('movie')
 }
 
 

@@ -26,14 +26,12 @@ async function getMovies(url) {
 }
 function showMovies(movies) {
   // 画面初期化
-  show.innerHTML = ''
+
 
  //urlのidから作品を取得
-   const params = new URLSearchParams(window.location.search)
-   const id = params.get('id')
-   console.log(id)//null
-   const showMovie = movies.find(id)
-   console.log(showMovie)
+   const path = window.location.pathname.split('/')
+   const id = path[3]
+   const showMovie = movies.find((v) => v.id == id )
 
     //作品詳細用
     const showEL = document.createElement('div')
