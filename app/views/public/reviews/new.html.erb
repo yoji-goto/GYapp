@@ -1,2 +1,11 @@
-<h1>Public::Reviews#new</h1>
-<p>Find me in app/views/public/reviews/new.html.erb</p>
+<h1>レビュー新規作成</h1>
+
+<%= form_with model: @review, url: public_movie_path(@review.movie_id) do |f| %>
+<h2>レビュータイトル</h2>
+<%= f.text_field :title %>
+<h2>レビュー</h2>
+<%= f.text_area :review %>
+<h2>評価点</h2>
+<%= f.number_field :evaluation, min: 1, max: 10 %>
+<%= f.submit "レビューを投稿する" %>
+<% end %>
