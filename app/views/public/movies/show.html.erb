@@ -1,20 +1,31 @@
 <h1>作品詳細</h1>
-<div class="container">
-  <div class="row">
-    <div id="show"></div>
-      <div class="col-md-4">
-        <div>
-          <%= link_to "レビューを投稿する", new_public_review_path %>
+    <div class="container" id="show"></div>
+    <div class="row">
+    <table class="col-md-12">
+    <% @reviews.each do |review| %>
+    <div class="border">
+    <tr>
+      <td><%= review.title %></td><td><%= link_to review.user.name, public_customer_path(review.user.id) %></td>
+    </tr>
+    <tr>
+      <td class="border"><%= review.review %></td>
+    </tr>
+    </div>
+    <% end %>
+    <%= link_to "レビューを投稿する", new_public_review_path %>
+    </table>
+    </div>
+    <div class="contianer">
+      <div class="row">
+        <div class="col-md-1 offset-md-4">
+         <div>公開タグ</div>
+        </div>
+        <div class="col-md-5 border">
+          <div>タグ</div>
+        </div>
+        <div class="col-md-2">
+          <%= link_to "タグを追加する", homes_about_path %>
         </div>
       </div>
-      <div class="col-md-4">
-        <div>公開タグ</div>
-      </div>
-    <div class="col-md-4">
-    <% @reviews.each do |review| %>
-    <div class="border"><%= review.title %>|<%= link_to review.user.name, public_customer_path(review.user.id) %></div>
-    <div class="border"><%= review.review %></div>
-    <% end %>
     </div>
-  </div>
-</div>
+

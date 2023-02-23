@@ -1,7 +1,7 @@
 window.addEventListener('load', function(){
 // 定数
 // Discover
-const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1'
+const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1&language=ja-JP'
 // Images
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
 // Search
@@ -35,20 +35,22 @@ function showMovies(movies) {
 
     //作品詳細用
     const showEL = document.createElement('div')
+    showEL.className = 'row'
     showEL.innerHTML =
     `
     <div class="col-md-4">
     <img src="${IMG_PATH + showMovie.poster_path}" alt="${showMovie.title}" width="${200}" margin="${10}">
     <div>みんなの評価</div>
+    <h2>${showMovie.vote_average}/10</h2>
     </div>
 
-    <div class="col-md-4">
-    <h3>${showMovie.title}</h3>
+    <div class="col-md-8">
+    <h2>${showMovie.title}</h2>
     <table>
-    <tr><th>公開日時</th><td>${showMovie.title}</td></tr>
+    <tr><th>公開日時</th><td> 0000/00/00</td></tr>
     <tr><th>作品紹介</th></tr>
-    <tr><td>${showMovie.overview}</td></tr>
     </table>
+    <div>${showMovie.overview}</div>
     </div>
     `
     show.appendChild(showEL)

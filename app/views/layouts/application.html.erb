@@ -25,7 +25,7 @@
       </li>
         <% if customer_signed_in? %>
         <li class="nav-link">
-          <%= link_to "マイページ", public_customer_path(current_customer_id) %>
+          <%= link_to "マイページ", public_customer_path(current_customer.id) %>
         </li>
         <li class="nav-link" href="/">
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
@@ -45,10 +45,10 @@
         </li>
         <% else %>
         <li class="nav-link">
-          <%= link_to "新規会員登録", new_admin_registration_path %>
+          <%= link_to "新規会員登録", new_customer_registration_path %>
         </li>
         <li class="nav-link">
-          <%= link_to "ログイン", new_admin_session_path %>
+          <%= link_to "ログイン", new_customer_session_path %>
         </li>
         <% end %>
       </ul>
