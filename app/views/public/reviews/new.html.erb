@@ -1,11 +1,12 @@
 <h1>レビュー新規作成</h1>
 
-<%= form_with model: @review, url: public_movie_path(@review.movie_id) do |f| %>
+<%= form_with model: @review, url: public_reviews_path do |f| %>
 <h2>レビュータイトル</h2>
 <%= f.text_field :title %>
 <h2>レビュー</h2>
 <%= f.text_area :review %>
 <h2>評価点</h2>
 <%= f.number_field :evaluation, min: 1, max: 10 %>
+<%= f.hidden_field :movie_id %>
 <%= f.submit "レビューを投稿する" %>
 <% end %>

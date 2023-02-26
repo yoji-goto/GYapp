@@ -60,3 +60,5 @@ gem 'devise'
 gem 'net-smtp'
 
 gem 'themoviedb-api', '~>1.3'
+
+gem 'pry-byebug', group: :development

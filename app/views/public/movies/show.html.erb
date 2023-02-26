@@ -1,19 +1,25 @@
 <h1>作品詳細</h1>
     <div class="container" id="show"></div>
     <div class="row">
-    <table class="col-md-12">
+    <table class="mx-auto">
     <% @reviews.each do |review| %>
     <div class="border">
     <tr>
-      <td><%= review.title %></td><td><%= link_to review.user.name, public_customer_path(review.user.id) %></td>
+      <td><%= link_to review.title, public_review_path(review.id) %></td><td><%= review.evaluation %></td>
     </tr>
     <tr>
       <td class="border"><%= review.review %></td>
     </tr>
     </div>
     <% end %>
-    <%= link_to "レビューを投稿する", new_public_review_path %>
     </table>
+    <div class="right">
+    <%= form_with model: @review, url: new_public_review_path, method: :get  do |f| %>
+    <%= f.hidden_field :movie_id %>
+    <%= f.submit "レビューを投稿する" %>
+    <% end %>
+    </div>
+
     </div>
     <div class="contianer">
       <div class="row">
