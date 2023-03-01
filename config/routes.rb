@@ -2,17 +2,15 @@ Rails.application.routes.draw do
   namespace :public do
     resources :genres, :only => [:edit, :update]
     resources :reviews, :only => [:new, :create, :show] do
-      scope module: :reviews do
-        resources :comments, :only => [:create] do
-          collection do
-            patch 'report'
-            patch 'hidden'
-          end
-        end
-      end
       collection do
         patch 'report'
         patch 'hidden'
+      end
+    end
+    resources :comments, :only => [:create] do
+      collection do
+            patch 'report'
+            patch 'hidden'
       end
     end
     resources :movies, :only => [:index, :show] do

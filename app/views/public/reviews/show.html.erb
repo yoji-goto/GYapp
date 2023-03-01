@@ -1,2 +1,44 @@
-<h1>Public::Reviews#show</h1>
-<p>Find me in app/views/public/reviews/show.html.erb</p>
+<h1>レビュー詳細</h1>
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-6 offset-md-1">
+    <div id="movie"></div>
+     <table class="col-md-6">
+    <div class="border">
+    <tr>
+      <td><%= @review.title%></td><td>評価：<%= @review.evaluation %>/10点</td>
+    </tr>
+    <tr>
+      <td class="border"><%= @review.customer.name %></td><td><%= @review.review %></td>
+    </tr>
+    </div>
+    </table>
+    </div>
+
+    <table class="col-md-4">
+    <% @comments.each do |comment| %>
+    <div class="border">
+    <tr>
+      <td><%= comment.customer.name %></td>
+    </tr>
+    <tr>
+      <td class="border"><%= comment.comment %></td>
+    </tr>
+    </div>
+    <% end %>
+    </table>
+
+    <div class="container">
+      <div class="row">
+        <%= form_with model: @comment, url: public_comments_path do |f| %>
+        <h3>コメント新規投稿</h3>
+        <%= f.text_area :comment %>
+        <%= f.hidden_field :review_id %>
+        <%= f.submit "コメントを投稿する" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

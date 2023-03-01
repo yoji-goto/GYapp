@@ -3,9 +3,9 @@ class Public::MoviesController < ApplicationController
   end
 
   def show
-    @id = params[:id]
     @reviews = Review.where(movie_id: params[:id])
     @review = Review.new
+    @id = params[:id]
     @review.movie_id = @id
   end
 end
