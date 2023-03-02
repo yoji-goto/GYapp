@@ -12,12 +12,22 @@ class Public::CustomersController < ApplicationController
     if Customer.update(customer_params)
       redirect_to public_customer_path(current_customer.id)
     else
-      render :root
+      render :show
     end
+  end
+
+  def withdrawal
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to  root_path
   end
 
   private
   def customer_params
     params.require(:customer).permit(:name, :email, :self_introduction)
+  end
+  def withdrawal
+    params.require(:customer).permit(:is_deleted)
   end
 end
