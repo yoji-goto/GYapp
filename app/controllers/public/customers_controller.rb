@@ -27,7 +27,4 @@ class Public::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:name, :email, :self_introduction)
   end
-  def withdrawal
-    params.require(:customer).permit(:is_deleted)
-  end
 end

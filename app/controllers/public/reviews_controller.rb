@@ -21,6 +21,18 @@ class Public::ReviewsController < ApplicationController
     @comment.review_id = @id
   end
 
+  def report
+    @review = Review.find(params[:id])
+    @review.update(is_reported: true)
+    redirect_to public_review_path(@review.id)
+  end
+
+  def hidden
+    @review = Review.find(params[:id])
+    @review.update(is_displayed: true)
+    redirect_to public_movie_path(@review.movie_id)
+  end
+
   private
   def movie_id_params
   params.require(:review).permit(:movie_id)

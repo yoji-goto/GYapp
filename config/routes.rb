@@ -28,15 +28,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :genres, :only => [:new, :create, :edit]
-    resources :reviews, :only => [:show] do
-      scope module: :reviews do
-        resources :comments, :only => [:create] do
-          collection do
-            patch 'report'
-            patch 'hidden'
-          end
-        end
+    resources :reviews, :only => [:show, :index] do
+      collection do
+        patch 'report'
+        patch 'hidden'
       end
+    end
+    resources :comments, :only => [:create] do
       collection do
         patch 'report'
         patch 'hidden'

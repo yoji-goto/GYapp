@@ -1,2 +1,55 @@
-<h1>Admin::Reviews#show</h1>
-<p>Find me in app/views/admin/reviews/show.html.erb</p>
+<h1>管理者レビュー詳細</h1>
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-6 offset-md-1">
+    <div id="movie"></div>
+     <table class="col-md-6">
+    <div class="border">
+    <tr>
+      <td><%= @review.title%></td><td>評価：<%= @review.evaluation %>/10点</td>
+    </tr>
+    <tr>
+      <td class="border"><%= @review.customer.name %></td><td><%= @review.review %></td>
+    </tr>
+    <tr>
+      <th>通報ステータス</th>
+      <% if @review.is_reported == true %>
+      <td>通報中</td>
+      <% end %>
+      <% if @review.is_reported == false %>
+      <td>未通報</td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>表示ステータス</th>
+      <% if @review.is_displayed == true %>
+      <td>非表示</td>
+      <% end %>
+      <% if @review.is_displayed == false %>
+      <td>表示中</td>
+      <% end %>
+    </tr>
+    </div>
+    </table>
+    </div>
+    <div>
+       <%= link_to "レビューを非表示にする", hidden_public_reviews_path, method: :patch, data: {confirm: "本当に非表示にしますか？"} %>
+    </div>
+
+    <table class="col-md-4">
+    <% @comments.each do |comment| %>
+    <div class="border">
+    <tr>
+      <td><%= comment.customer.name %></td>
+    </tr>
+    <tr>
+      <td class="border"><%= comment.comment %></td>
+    </tr>
+    </div>
+    <% end %>
+    </table>
+
+    </div>
+  </div>
+</div>

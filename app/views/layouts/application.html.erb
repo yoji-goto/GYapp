@@ -35,10 +35,7 @@
           <%= link_to "会員一覧", admin_customers_path %>
         </li>
         <li class="nav-link">
-          <%= link_to "通報レビュー一覧", report_admin_reviews_path %>
-        </li>
-        <li>
-          <%= link_to "通報コメント一覧", report_admin_review_comments_path %>
+          <%= link_to "通報一覧", admin_reviews_path %>
         </li>
         <li class="nav-link">
           <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
@@ -56,6 +53,9 @@
       <form id="form">
         <input type="text" id="search" class="search" placeholder="Search">
       </form>
+      </li>
+      <li>
+        <%= link_to "管理者", new_admin_session_path %>
       </li>
     </div>
   </div>

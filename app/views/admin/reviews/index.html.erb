@@ -1,0 +1,24 @@
+<h1>通報一覧</h1>
+<div class="container">
+<div class="row">
+<table width="90%", class="mx-auto">
+  <tr><th>通報レビュー一覧</th></tr>
+  <tr  class="bg-light"><th>レビューID</th><th>レビュー内容</th><th>ユーザー名</th></tr>
+  <%= @reviews.each do |review| %>
+  <tr><td><%= review.id %></td><td><%= link_to review.review, admin_review_path(review.id) %></td><td><%= link_to review.customer.name, admin_customer_path(review.customer.id) %></td></tr>
+  <% end %>
+</table>
+</div>
+</div>
+
+<div class="container">
+<div class="row">
+<table width="90%", class="mx-auto">
+  <tr><th>通報コメント一覧</th></tr>
+  <tr  class="bg-light"><th>コメントID</th><th>コメント内容</th><th>ユーザー名</th></tr>
+  <%= @comments.each do |comment| %>
+  <tr><td><%= comment.id %></td><td><%= link_to comment.review, admin_review_path(comment.review.id) %></td><td><%= link_to comment.customer.name, admin_customer_path(comment.customer.id) %></td></tr>
+  <% end %>
+</table>
+</div>
+</div>
