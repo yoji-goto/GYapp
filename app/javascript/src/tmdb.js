@@ -1,7 +1,7 @@
 window.addEventListener('turbolinks:load', function(){
 // 定数
 // Discover
-const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1&language=ja-JP'
+const API_URL = 'https://api.themoviedb.org/3/discover/movie?with_genres=27&sort_by=popularity.desc&api_key=a882fb831bd72865c87e32d59c65bdda&page=1&language=ja-JP'
 // Images
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
 // Search

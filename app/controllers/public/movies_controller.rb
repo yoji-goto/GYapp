@@ -7,5 +7,6 @@ class Public::MoviesController < ApplicationController
     @review = Review.new
     @id = params[:id]
     @review.movie_id = @id
+    @genres = Genre.where(movie_id: params[:id])
   end
 end
