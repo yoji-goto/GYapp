@@ -1,53 +1,46 @@
 <h1>レビュー詳細</h1>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 offset-md-1">
-    <div id="movie"></div>
-     <table class="col-md-6">
-    <div class="border">
-    <tr>
-      <td><%= @review.title%></td><td>評価：<%= @review.evaluation %>/10点</td>
+    <table class="col-md-8" width="100%">
+    <tr class="border">
+      <th width="80%"><%= @review.title%></th><td>評価点：<%= @review.evaluation %>/10点</td>
     </tr>
-    <tr>
-      <td class="border"><%= @review.customer.name %></td><td><%= @review.review %></td>
+    <tr class="border">
+      <td><%= @review.review %></td><td>投稿者：<%= link_to @review.customer.name, public_customer_path(@review.customer_id) %></td>
     </tr>
     <tr>
     <% if current_customer == @review.customer %>
-       <td><%= link_to "レビューを削除する", hidden_public_reviews_path, method: :patch, data: {confirm: "本当に削除しますか？"} %></td>
+       <td><%= link_to "レビューを削除する", hidden_public_reviews_path(review_id: @review.id), method: :patch, data: {confirm: "本当に削除しますか？"} %></td>
     <% elsif current_customer !=  @review.customer %>
-       <td><%= link_to "レビューを通報する", report_public_reviews_path, method: :patch, data: {confirm: "本当に通報しますか？"} %></td>
+       <td><%= link_to "レビューを通報する", report_public_reviews_path(review_id: @review.id), method: :patch, data: {confirm: "本当に通報しますか？"} %></td>
     <% end %>
     </tr>
-    </div>
     </table>
-    </div>
 
-    <table class="col-md-4">
+    <table class="col-md-3 offset-md-1">
     <tr><th>コメント一覧</th></tr>
     <% @comments.each do |comment| %>
-    <div class="border">
-    <tr>
-      <td><%= comment.customer.name %></td>
+    <tr class="border">
+      <th width="70%"><%= comment.customer.name %></th>
+      <% if current_customer == comment.customer %>
+       <td><%= link_to "削除する", hidden_public_comments_path(comment_id: comment.id), method: :patch, data: {confirm: "コメントを削除しますか？"} %></td>
+     <% elsif current_customer !=  comment.customer %>
+       <td><%= link_to "通報する", report_public_comments_path(comment_id: comment.id), method: :patch, data: {confirm: "コメントを通報しますか？"} %></td>
+    <% end %>
     </tr>
-    <tr>
+    <tr class="border">
       <td><%= comment.comment %></td>
     </tr>
     <tr>
-    <% if current_customer == comment.customer %>
-       <td><%= link_to "削除する", hidden_public_comments_path, method: :patch, data: {confirm: "コメントを削除しますか？"} %></td>
-    <% elsif current_customer !=  comment.customer %>
-       <td><%= link_to "通報する", report_public_comments_path, method: :patch, data: {confirm: "コメントを通報しますか？"} %></td>
-    <% end %>
     </tr>
-    </div>
     <% end %>
     </table>
   </div>
 </div>
-
+<% if customer_signed_in? %>
 <div class="container">
   <div class="row">
-        <div class="col-md-6 offset-md-1">
+        <div class="col-md-8" width="100%">
         <%= form_with model: @comment, url: public_comments_path do |f| %>
         <h3>コメント新規投稿</h3>
         <%= f.text_area :comment %>
@@ -57,3 +50,4 @@
       </div>
   </div>
 </div>
+<% end %>

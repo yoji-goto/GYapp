@@ -15,20 +15,20 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    @comments = Comment.where(review_id: params[:id])
+    @comments = Comment.where(review_id: params[:id], is_deisplayed: false)
     @id = params[:id]
     @comment = Comment.new
     @comment.review_id = @id
   end
 
   def report
-    @review = Review.find(params[:id])
+    @review = Review.find(params[:review_id])
     @review.update(is_reported: true)
     redirect_to public_review_path(@review.id)
   end
 
   def hidden
-    @review = Review.find(params[:id])
+    @review = Review.find(params[:review_id])
     @review.update(is_displayed: true)
     redirect_to public_movie_path(@review.movie_id)
   end

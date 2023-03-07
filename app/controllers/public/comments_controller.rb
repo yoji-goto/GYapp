@@ -12,8 +12,13 @@ class Public::CommentsController < ApplicationController
     end
   end
   def report
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:comment_id])
     @comment.update(is_reported: true)
+    redirect_to public_review_path(@comment.review.id)
+  end
+  def hidden
+     @comment = Comment.find(params[:comment_id])
+    @comment.update(is_deisplayed: true)
     redirect_to public_review_path(@comment.review.id)
   end
 

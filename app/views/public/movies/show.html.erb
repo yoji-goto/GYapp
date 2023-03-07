@@ -1,37 +1,47 @@
+<% if admin_signed_in? %>
+<h1>作品詳細(管理者)</h1>
+<% else %>
 <h1>作品詳細</h1>
+<% end %>
     <div class="container" id="show"></div>
-    <div class="row">
-    <table class="mx-auto">
-    <% @reviews.each do |review| %>
-    <div class="border">
-    <tr>
-      <td><%= link_to review.title, public_review_path(review.id) %></td><td><%= review.evaluation %></td>
-    </tr>
-    <tr>
-      <td class="border"><%= review.review %></td>
-    </tr>
-    </div>
+    <div class="container">
+     <div class="row">
+       <div class="col-md-10">
+     <table width="100%">
+      <tr><th>レビュー一覧</th></tr>
+      <% @reviews.each do |review| %>
+      <tr class="border">
+      <% if admin_signed_in? %>
+      <td width="80%"><%= link_to review.title, admin_review_path(review.id) %></td>
+      <td>投稿者:<%= link_to review.customer.name,  admin_customer_path(review.customer_id) %></td>
+      <% else %>
+      <td width="80%"><%= link_to review.title, public_review_path(review.id) %></td>
+      <td>投稿者:<%= link_to review.customer.name,  public_customer_path(review.customer_id) %></td>
+      <% end %>
+      </tr>
+      <tr>
+      <td class="border"><%= review.review %></td><td>評価点<%= review.evaluation %>/10点</td>
+      </tr>
+      <% end %>
+     </table>
+     <% if customer_signed_in? %>
+     <div class="left">
+     <%= form_with model: @review, url: new_public_review_path, method: :get  do |f| %>
+     <%= f.hidden_field :movie_id %>
+     <%= f.submit "レビューを投稿する" %>
+     <% end %>
+     </div>
+     <% end %>
+     </div>
+
+    <table class="col-md-2">
+    <tr><th>作品タグ</th></tr>
+    <tr class="border"><td>タグ</td></tr>
+    <% if customer_signed_in? %>
+    <tr><td><%= link_to "タグを追加する", homes_about_path %></td></tr>
     <% end %>
     </table>
-    <div class="right">
-    <%= form_with model: @review, url: new_public_review_path, method: :get  do |f| %>
-    <%= f.hidden_field :movie_id %>
-    <%= f.submit "レビューを投稿する" %>
-    <% end %>
-    </div>
 
-    </div>
-    <div class="contianer">
-      <div class="row">
-        <div class="col-md-1 offset-md-4">
-         <div>公開タグ</div>
-        </div>
-        <div class="col-md-5 border">
-          <div>タグ</div>
-        </div>
-        <div class="col-md-2">
-          <%= link_to "タグを追加する", homes_about_path %>
-        </div>
       </div>
     </div>
 
