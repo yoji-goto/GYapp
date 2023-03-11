@@ -10,7 +10,7 @@
      <table width="100%">
       <tr><th>レビュー一覧</th></tr>
       <% @reviews.each do |review| %>
-      <tr class="border">
+      <tr class="border p-3 mb-2 bg-white text-dark">
       <% if admin_signed_in? %>
       <td width="80%"><%= link_to review.title, admin_review_path(review.id) %></td>
       <td>投稿者:<%= link_to review.customer.name,  admin_customer_path(review.customer_id) %></td>
@@ -19,7 +19,7 @@
       <td>投稿者:<%= link_to review.customer.name,  public_customer_path(review.customer_id) %></td>
       <% end %>
       </tr>
-      <tr>
+      <tr  class="p-3 mb-2 bg-white text-dark">
       <td class="border"><%= review.review %></td><td>評価点<%= review.evaluation %>/10点</td>
       </tr>
       <% end %>
@@ -36,7 +36,7 @@
 
     <table class="col-md-2">
     <tr><th>作品タグ</th></tr>
-    <tr class="border"><td>タグ</td></tr>
+    <tr class="border p-3 mb-2 bg-white text-dark"><td>タグ</td></tr>
     <% if customer_signed_in? %>
     <tr><td><%= link_to "タグを追加する", edit_public_genre_path %></td></tr>
     <% end %>

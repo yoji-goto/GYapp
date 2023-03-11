@@ -2,14 +2,14 @@
 <div class="container">
 <div class="row">
 <table width="90%", class="mx-auto">
-<tr class="bg-light">
+<tr class="bg-light text-dark">
   <th>会員ID</th>
   <th>氏名</th>
   <th>メールアドレス</th>
   <th>ステータス</th>
 </tr>
 <% @customers.each do |customer| %>
-<tr>
+<tr class="border bg-light text-dark">
   <td><%= customer.id %></td>
   <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
   <td><%= customer.email %></td>

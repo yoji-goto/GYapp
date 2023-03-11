@@ -5,7 +5,7 @@ const API_URL = 'https://api.themoviedb.org/3/discover/movie?with_genres=27&sort
 // Images
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
 // Search
-const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="'
+const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?with_genres=27&api_key=3fd2be6f0c70a2a598f084ddfb75487c&language=ja-JP&query="'
 
 // 要素を取得
 const main = document.getElementById('main')
@@ -47,9 +47,11 @@ function showMovies(movies) {
     // MoveパネルをHTMLに埋め込む
     movieEl.innerHTML =
     `
-     <div class="col-md-3 offset-md-1 d-inline-block text-truncate" style="max-width: 230px;">
-      <img src="${IMG_PATH + poster_path}" alt="${title}" width="${200}" margin="${10}">
-      <h5><a id="url"  href="/public/movies/${id}">${title}</a></h5>
+     <div class="col-md-4 offset-md-1 d-inline-block text-truncate" style="max-width: 230px;">
+     <table>
+      <tr><td><img src="${IMG_PATH + poster_path}" alt="${title}" width="${230}" margin="${10}"></td></tr>
+      <tr><td><h5><a id="url"  href="/public/movies/${id}" class="text-white bg-dark">${title}</a></h5></td></tr>
+     </table>
      </div>
     `
     main.appendChild(movieEl)
