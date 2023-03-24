@@ -1,2 +1,55 @@
-<h1>Admin::Reviews#show</h1>
-<p>Find me in app/views/admin/reviews/show.html.erb</p>
+<h1>管理者レビュー詳細</h1>
+<div class="container">
+  <div class="row">
+    <table class="col-md-8" width="100%">
+    <tr class="border">
+      <th width="80%"><%= @review.title%></th><td>評価点：<%= @review.evaluation %>/10点</td>
+    </tr>
+    <tr class="border">
+      <td><%= @review.review %></td><td>投稿者：<%= link_to @review.customer.name, public_customer_path(@review.customer_id) %></td>
+    </tr>
+    <tr>
+      <th>通報ステータス</th>
+      <% if @review.is_reported == true %>
+      <td>通報中</td>
+      <% end %>
+      <% if @review.is_reported == false %>
+      <td>未通報</td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>表示ステータス</th>
+      <% if @review.is_displayed == true %>
+      <td>非表示</td>
+      <% end %>
+      <% if @review.is_displayed == false %>
+      <td>表示中</td>
+      <% end %>
+    </tr>
+    <tr>
+       <td><%= link_to "レビューを非表示にする", hidden_public_reviews_path(review_id: @review.id), method: :patch, data: {confirm: "非表示にしますか？"} %></td>
+    </tr>
+    </table>
+
+    <table class="col-md-3 offset-md-1">
+    <tr><th>コメント一覧</th></tr>
+    <% @comments.each do |comment| %>
+    <tr class="border">
+      <th width="60%"><%= comment.customer.name %></th>
+       <td><%= link_to "非表示にする", hidden_public_comments_path(comment_id: comment.id), method: :patch, data: {confirm: "コメントを非表示にしますか？"} %></td>
+    </tr>
+    <tr class="border">
+      <td><%= comment.comment %></td>
+      <% if comment.is_deisplayed == true %>
+      <td>非表示</td>
+      <% end %>
+      <% if comment.is_deisplayed == false %>
+      <td>表示中</td>
+      <% end %>
+    </tr>
+    <tr>
+    </tr>
+    <% end %>
+    </table>
+  </div>
+</div>

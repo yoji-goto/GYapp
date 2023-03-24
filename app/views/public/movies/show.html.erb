@@ -1,2 +1,47 @@
-<h1>Public::Movies#show</h1>
-<p>Find me in app/views/public/movies/show.html.erb</p>
+<% if admin_signed_in? %>
+<h1>作品詳細(管理者)</h1>
+<% else %>
+<h1>作品詳細</h1>
+<% end %>
+    <div class="container" id="show"></div>
+    <div class="container">
+     <div class="row">
+       <div class="col-md-10">
+     <table width="100%">
+      <tr><th>レビュー一覧</th></tr>
+      <% @reviews.each do |review| %>
+      <tr class="border p-3 mb-2 bg-white text-dark">
+      <% if admin_signed_in? %>
+      <td width="80%"><%= link_to review.title, admin_review_path(review.id) %></td>
+      <td>投稿者:<%= link_to review.customer.name,  admin_customer_path(review.customer_id) %></td>
+      <% else %>
+      <td width="80%"><%= link_to review.title, public_review_path(review.id) %></td>
+      <td>投稿者:<%= link_to review.customer.name,  public_customer_path(review.customer_id) %></td>
+      <% end %>
+      </tr>
+      <tr  class="p-3 mb-2 bg-white text-dark">
+      <td class="border"><%= review.review %></td><td>評価点<%= review.evaluation %>/10点</td>
+      </tr>
+      <% end %>
+     </table>
+     <% if customer_signed_in? %>
+     <div class="left">
+     <%= form_with model: @review, url: new_public_review_path, method: :get  do |f| %>
+     <%= f.hidden_field :movie_id %>
+     <%= f.submit "レビューを投稿する" %>
+     <% end %>
+     </div>
+     <% end %>
+     </div>
+
+    <table class="col-md-2">
+    <tr><th>作品タグ</th></tr>
+    <tr class="border p-3 mb-2 bg-white text-dark"><td>タグ</td></tr>
+    <% if customer_signed_in? %>
+    <tr><td><%= link_to "タグを追加する", edit_public_genre_path %></td></tr>
+    <% end %>
+    </table>
+
+      </div>
+    </div>
+

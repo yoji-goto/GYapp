@@ -1,0 +1,54 @@
+<h1>通報一覧</h1>
+<div class="container">
+<div class="row">
+<table width="100%", class="mx-auto">
+  <tr><th>通報レビュー一覧</th></tr>
+  <tr  class="bg-light text-dark">
+    <th>レビューID</th>
+    <th width="50%">レビュー内容</th>
+    <th>ユーザー名</th>
+    <th>表示ステータス</th>
+    <th></th>
+  </tr>
+  <% @reviews.each do |review| %>
+  <tr class="border bg-light text-dark">
+    <td><%= review.id %></td><td><%= link_to review.review, admin_review_path(review.id) %></td><td><%= link_to review.customer.name, admin_customer_path(review.customer.id) %></td>
+    <% if review.is_displayed == true %>
+      <td>非表示</td>
+    <% end %>
+    <% if review.is_displayed == false %>
+      <td>表示中</td>
+    <% end %>
+    <td><%= link_to "非表示にする", hidden_public_reviews_path(review_id: review.id), method: :patch, data: {confirm: "非表示にしますか？"}, class: "btn btn-primary" %></td>
+  </tr>
+  <% end %>
+</table>
+</div>
+</div>
+
+<div class="container">
+<div class="row">
+<table width="100%", class="mx-auto">
+  <tr><th>通報コメント一覧</th></tr>
+  <tr  class="bg-light text-dark">
+    <th>コメントID</th>
+    <th width="50%">コメント内容</th>
+    <th>ユーザー名</th>
+    <th>表示ステータス</th>
+    <th></th>
+  </tr>
+  <% @comments.each do |comment| %>
+  <tr class="border bg-light text-dark">
+    <td><%= comment.id %></td><td><%= link_to comment.comment, admin_review_path(comment.review.id) %></td><td><%= link_to comment.customer.name, admin_customer_path(comment.customer.id) %></td>
+    <% if comment.is_deisplayed == true %>
+      <td>非表示</td>
+    <% end %>
+    <% if comment.is_deisplayed == false %>
+      <td>表示中</td>
+    <% end %>
+    <td><%= link_to "非表示にする", hidden_public_comments_path(comment_id: comment.id), method: :patch, data: {confirm: "コメントを削除しますか？"}, class: "btn btn-primary" %></td>
+  </tr>
+  <% end %>
+</table>
+</div>
+</div>
