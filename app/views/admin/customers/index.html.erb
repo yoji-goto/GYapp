@@ -1,1 +1,26 @@
-customer index
+<h1>会員一覧</h1>
+<div class="container">
+<div class="row">
+<table width="90%", class="mx-auto">
+<tr class="bg-light text-dark">
+  <th>会員ID</th>
+  <th>氏名</th>
+  <th>メールアドレス</th>
+  <th>ステータス</th>
+</tr>
+<% @customers.each do |customer| %>
+<tr class="border bg-light text-dark">
+  <td><%= customer.id %></td>
+  <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
+  <td><%= customer.email %></td>
+  <% if customer.is_deleted == true %>
+    <td>退会済み</td>
+  <% end %>
+  <% if customer.is_deleted == false %>
+    <td>入会中</td>
+  <% end %>
+</tr>
+<% end %>
+</table>
+</div>
+</div>

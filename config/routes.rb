@@ -2,17 +2,15 @@ Rails.application.routes.draw do
   namespace :public do
     resources :genres, :only => [:edit, :update]
     resources :reviews, :only => [:new, :create, :show] do
-      scope module: :reviews do
-        resources :comments, :only => [:create] do
-          collection do
-            patch 'report'
-            patch 'hidden'
-          end
-        end
-      end
       collection do
         patch 'report'
         patch 'hidden'
+      end
+    end
+    resources :comments, :only => [:create] do
+      collection do
+            patch 'report'
+            patch 'hidden'
       end
     end
     resources :movies, :only => [:index, :show] do
@@ -30,15 +28,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :genres, :only => [:new, :create, :edit]
-    resources :reviews, :only => [:show] do
-      scope module: :reviews do
-        resources :comments, :only => [:create] do
-          collection do
-            patch 'report'
-            patch 'hidden'
-          end
-        end
+    resources :reviews, :only => [:show, :index] do
+      collection do
+        patch 'report'
+        patch 'hidden'
       end
+    end
+    resources :comments, :only => [:create] do
       collection do
         patch 'report'
         patch 'hidden'
@@ -57,8 +53,13 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :customers
-  devise_for :admins
+  devise_for :customers,skip: [:passwords], controllers: {
+  registrations: "customer/registrations",
+  sessions: 'customer/sessions'
+  }
+  devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
+  }
 
   get 'homes/about'
  root to: 'homes#top'

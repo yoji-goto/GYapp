@@ -1,2 +1,32 @@
-<h1>Admin::Movies#show</h1>
-<p>Find me in app/views/admin/movies/show.html.erb</p>
+<h1>作品詳細</h1>
+    <div class="container" id="show"></div>
+    <div class="container">
+     <div class="row">
+       <div class="col-md-10">
+     <table width="100%">
+      <tr><th>レビュー一覧</th></tr>
+      <% @reviews.each do |review| %>
+      <tr class="border">
+      <td width="80%"><%= link_to review.title, public_review_path(review.id) %></td><td>投稿者:<%= link_to review.customer.name,  public_customer_path(review.customer_id) %></td>
+      </tr>
+      <tr>
+      <td class="border"><%= review.review %></td><td>評価点<%= review.evaluation %>/10点</td>
+      </tr>
+      <% end %>
+     </table>
+     <div class="left">
+     <%= form_with model: @review, url: new_public_review_path, method: :get  do |f| %>
+     <%= f.hidden_field :movie_id %>
+     <%= f.submit "レビューを投稿する" %>
+     <% end %>
+     </div>
+     </div>
+
+    <table class="col-md-2">
+    <tr><th>作品タグ</th></tr>
+    <tr class="border"><td>タグ</td></tr>
+    <tr><td><%= link_to "タグを追加する", homes_about_path %></td></tr>
+    </table>
+
+      </div>
+    </div>

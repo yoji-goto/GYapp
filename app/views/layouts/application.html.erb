@@ -10,22 +10,22 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-<body>
+<body class="p-3 mb-2 bg-secondary text-white">
 <header class="navbar-dark bg-dark">
   <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">LOOK－HOR</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand h1" href="/">LOOK－HOR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-link -light">
-        <%= link_to "作品一覧", public_movies_path %>
+        <%= link_to "作品一覧", public_movies_path, data: {"turbolinks" => false} %>
       </li>
         <% if customer_signed_in? %>
         <li class="nav-link">
-          <%= link_to "マイページ", public_customer_path(current_customer_id) %>
+          <%= link_to "マイページ", public_customer_path(current_customer.id) %>
         </li>
         <li class="nav-link" href="/">
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
@@ -35,33 +35,34 @@
           <%= link_to "会員一覧", admin_customers_path %>
         </li>
         <li class="nav-link">
-          <%= link_to "通報レビュー一覧", report_admin_reviews_path %>
-        </li>
-        <li>
-          <%= link_to "通報コメント一覧", report_admin_review_comments_path %>
+          <%= link_to "通報一覧", admin_reviews_path %>
         </li>
         <li class="nav-link">
           <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
         </li>
         <% else %>
         <li class="nav-link">
-          <%= link_to "新規会員登録", new_admin_registration_path %>
+          <%= link_to "新規会員登録", new_customer_registration_path %>
         </li>
         <li class="nav-link">
-          <%= link_to "ログイン", new_admin_session_path %>
+          <%= link_to "ログイン", new_customer_session_path %>
+        </li>
+        <li class="nav-link">
+          <%= link_to "about", homes_about_path %>
         </li>
         <% end %>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <li class="nav-link">
+      <form id="form">
+        <input type="text" id="search" class="search" placeholder="Search">
       </form>
+      </li>
+      </ul>
     </div>
   </div>
 </nav>
 </header>
 
-    <main>
+    <main class="p-3 mb-2 bg-secondary text-white">
     <%= yield %>
     </main>
 

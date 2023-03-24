@@ -1,2 +1,22 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<h1>ユーザー情報編集</h1>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <%= form_with model: @customer, url: public_customer_path do |f| %>
+      <table>
+      <tr><th>ユーザー名</th><td><%= f.text_field :name %></td></tr>
+      <tr><th>メールアドレス</th><td><%= f.email_field :email %></td></tr>
+      <tr><th>紹介文</th><td><%= f.text_area :self_introduction %></td></tr>
+      </table>
+      <%= f.submit "変更を保存する" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <%= link_to "退会ステータス更新(退会)", withdrawal_public_customers_path, method: :patch, data: {confirm: "本当に更新しますか？"} %>
+    </div>
+  </div>
+</div>

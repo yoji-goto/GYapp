@@ -1,2 +1,53 @@
-<h1>Public::Reviews#show</h1>
-<p>Find me in app/views/public/reviews/show.html.erb</p>
+<h1>レビュー詳細</h1>
+<div class="container">
+  <div class="row">
+    <table class="col-md-8 p-3 mb-2" width="100%">
+    <tr class="border bg-white text-dark">
+      <th width="80%"><h2><%= @review.title%></h2></th><td>評価点：<%= @review.evaluation %>/10点</td>
+    </tr>
+    <tr class="bg-white text-dark">
+      <td><%= @review.review %></td><td>投稿者：<%= link_to @review.customer.name, public_customer_path(@review.customer_id) %></td>
+    </tr>
+    <tr>
+    <% if current_customer == @review.customer %>
+       <td><%= link_to "レビューを削除する", hidden_public_reviews_path(review_id: @review.id), method: :patch, data: {confirm: "本当に削除しますか？"}, class: "btn btn-primary" %></td>
+    <% elsif current_customer !=  @review.customer %>
+       <td><%= link_to "レビューを通報する", report_public_reviews_path(review_id: @review.id), method: :patch, data: {confirm: "本当に通報しますか？"}, class: "btn btn-sm btn-danger" %></td>
+    <% end %>
+    </tr>
+    </table>
+
+    <table class="col-md-3 offset-md-1">
+    <tr><th>コメント一覧</th></tr>
+    <% @comments.each do |comment| %>
+    <tr class="border p-3 mb-2 bg-white text-dark">
+      <th width="70%"><%= comment.customer.name %></th>
+      <% if current_customer == comment.customer %>
+       <td><%= link_to "削除", hidden_public_comments_path(comment_id: comment.id), method: :patch, data: {confirm: "コメントを削除しますか？"}, class: "btn btn-primary" %></td>
+     <% elsif current_customer !=  comment.customer %>
+       <td><%= link_to "通報", report_public_comments_path(comment_id: comment.id), method: :patch, data: {confirm: "コメントを通報しますか？"}, class: "btn btn-sm btn-danger" %></td>
+    <% end %>
+    </tr>
+    <tr class="border p-3 mb-2 bg-white text-dark">
+      <td><%= comment.comment %></td>
+    </tr>
+    <tr>
+    </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
+<% if customer_signed_in? %>
+<div class="container">
+  <div class="row">
+        <div class="col-md-3 offset-md-9" width="100%">
+        <%= form_with model: @comment, url: public_comments_path do |f| %>
+        <h3>コメント新規投稿</h3>
+        <%= f.text_area :comment %>
+        <%= f.hidden_field :review_id %>
+        <%= f.submit "コメントを投稿する" %>
+        <% end %>
+      </div>
+  </div>
+</div>
+<% end %>
