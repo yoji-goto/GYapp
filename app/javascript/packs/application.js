@@ -20,5 +20,3 @@ ActiveStorage.start()
 import '../src/tmdb.js'
 
 import '../src/show.js'
-
-import '../src/movie.js'
