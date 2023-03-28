@@ -14,7 +14,7 @@
 <header class="navbar-dark bg-dark">
   <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a class="navbar-brand h1" href="/">LOOK－HOR</a>
+    <a class="navbar-brand h1" href="/"><%= image_tag "logo.jpg", :size =>  '100x65' %></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -51,11 +51,6 @@
           <%= link_to "about", homes_about_path %>
         </li>
         <% end %>
-        <li class="nav-link">
-      <form id="form">
-        <input type="text" id="search" class="search" placeholder="Search">
-      </form>
-      </li>
       </ul>
     </div>
   </div>
