@@ -15,7 +15,7 @@ main{
 .main-visual-image{
   width: 100%;
   height: 400px;
-  background-image: url(/assets/top.jpg) ;
+  background-image: image-url('top.jpg') ;
   background-size: cover;
 }
 
@@ -26,4 +26,8 @@ main{
   height: 400px;
    text-align: center;
   background-color: rgba( 0, 0, 0, 0.5);
+}
+
+.main-visual-link{
+  margin: 30px;
 }
